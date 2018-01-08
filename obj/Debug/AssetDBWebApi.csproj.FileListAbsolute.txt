@@ -46,7 +46,6 @@ C:\Users\kumar-70\Documents\GitHub\AssetDBWebApi\bin\Microsoft.AI.DependencyColl
 C:\Users\kumar-70\Documents\GitHub\AssetDBWebApi\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Users\kumar-70\Documents\GitHub\AssetDBWebApi\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\kumar-70\Documents\GitHub\AssetDBWebApi\bin\Microsoft.AI.Web.xml
-C:\Users\kumar-70\Documents\GitHub\AssetDBWebApi\obj\Debug\AssetDBWebApi.csprojResolveAssemblyReference.cache
 C:\Users\kumar-70\Documents\GitHub\AssetDBWebApi\obj\Debug\AssetDBWebApi.csproj.CoreCompileInputs.cache
 C:\Users\kumar-70\Documents\GitHub\AssetDBWebApi\obj\Debug\AssetDBWebApi.dll
 C:\Users\kumar-70\Documents\GitHub\AssetDBWebApi\obj\Debug\AssetDBWebApi.pdb
