@@ -1,0 +1,631 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AssetDBAzureSampleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Asset">
+    <Key>
+      <PropertyRef Name="AssetID" />
+    </Key>
+    <Property Name="AssetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AssetType" Type="int" Nullable="false" />
+    <Property Name="AssetSubType" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="ClientID" Type="nvarchar" MaxLength="255" />
+    <Property Name="LabID" Type="nvarchar" MaxLength="255" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DeviceStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="HasAlarm" Type="bit" Nullable="false" />
+    <Property Name="AlarmMessage" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastServiceDate" Type="date" />
+    <Property Name="NextServiceDate" Type="date" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="AssetRelationship">
+    <Key>
+      <PropertyRef Name="AssetID" />
+      <PropertyRef Name="RelatedAssetID" />
+    </Key>
+    <Property Name="AssetID" Type="int" Nullable="false" />
+    <Property Name="RelatedAssetID" Type="int" Nullable="false" />
+    <Property Name="Relationship" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="AssetSubType">
+    <Key>
+      <PropertyRef Name="AssetSubTypeID" />
+    </Key>
+    <Property Name="AssetSubTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AssetType" Type="int" Nullable="false" />
+    <Property Name="AssetSubType" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AssetSubTypeProperty">
+    <Key>
+      <PropertyRef Name="AssetSubTypePropertyID" />
+    </Key>
+    <Property Name="AssetSubTypePropertyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AssetSubType" Type="int" Nullable="false" />
+    <Property Name="AssetSubTypeProperty" Type="nvarchar" MaxLength="25" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AssetSubTypePropertyValue">
+    <Key>
+      <PropertyRef Name="AssetSubTypePropertyValueID" />
+    </Key>
+    <Property Name="AssetSubTypePropertyValueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Asset" Type="int" Nullable="false" />
+    <Property Name="AssetSubTypeProperty" Type="int" Nullable="false" />
+    <Property Name="AssetSubTypePropertyValue" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="AssetSubTypePropertyValueLookup">
+    <Key>
+      <PropertyRef Name="LookupID" />
+    </Key>
+    <Property Name="LookupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PropertySubType" Type="int" Nullable="false" />
+    <Property Name="LookupValue" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AssetType">
+    <Key>
+      <PropertyRef Name="AssetTypeID" />
+    </Key>
+    <Property Name="AssetTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AssetType" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="AssetTypeProperty">
+    <Key>
+      <PropertyRef Name="AssetTypePropertyID" />
+    </Key>
+    <Property Name="AssetTypePropertyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AssetType" Type="int" Nullable="false" />
+    <Property Name="AssetTypeProperty" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AssetTypePropertyValue">
+    <Key>
+      <PropertyRef Name="AssetTypePropertyValueID" />
+    </Key>
+    <Property Name="AssetTypePropertyValueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Asset" Type="int" Nullable="false" />
+    <Property Name="AssetTypeProperty" Type="int" Nullable="false" />
+    <Property Name="AssetTypePropertyValue" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="AssetTypePropertyValueLookup">
+    <Key>
+      <PropertyRef Name="LookupID" />
+    </Key>
+    <Property Name="LookupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PropertyType" Type="int" Nullable="false" />
+    <Property Name="LookupValue" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DocumentMimeTypes">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Extension" Type="nvarchar" MaxLength="50" />
+    <Property Name="MimeType" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Documents">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AssetID" Type="int" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateUploaded" Type="datetime" Nullable="false" />
+    <Property Name="Extension" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Data" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ContentLength" Type="int" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderType" Type="nvarchar" MaxLength="255" />
+    <Property Name="PurchaseOrderNo" Type="nvarchar" MaxLength="255" />
+    <Property Name="RequisitionNo" Type="nvarchar" MaxLength="255" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" />
+    <Property Name="Supplier" Type="nvarchar" MaxLength="255" />
+    <Property Name="CallReference" Type="nvarchar" MaxLength="255" />
+    <Property Name="CostCode" Type="nvarchar" MaxLength="255" />
+    <Property Name="InvoiceNo" Type="nvarchar" MaxLength="255" />
+    <Property Name="OrderDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="OrderItems">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderID" Type="int" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="255" />
+    <Property Name="MakeOrPublisher" Type="nvarchar" MaxLength="255" />
+    <Property Name="ModelOrTitle" Type="nvarchar" MaxLength="255" />
+    <Property Name="Version" Type="nvarchar" MaxLength="15" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Value" Type="money" />
+    <Property Name="Status" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <Association Name="FK_Asset_AssetSubType">
+    <End Role="AssetSubType" Type="Self.AssetSubType" Multiplicity="1" />
+    <End Role="Asset" Type="Self.Asset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AssetSubType">
+        <PropertyRef Name="AssetSubTypeID" />
+      </Principal>
+      <Dependent Role="Asset">
+        <PropertyRef Name="AssetSubType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Asset_AssetType">
+    <End Role="AssetType" Type="Self.AssetType" Multiplicity="1" />
+    <End Role="Asset" Type="Self.Asset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AssetType">
+        <PropertyRef Name="AssetTypeID" />
+      </Principal>
+      <Dependent Role="Asset">
+        <PropertyRef Name="AssetType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetRelationship_Asset">
+    <End Role="Asset" Type="Self.Asset" Multiplicity="1" />
+    <End Role="AssetRelationship" Type="Self.AssetRelationship" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Asset">
+        <PropertyRef Name="AssetID" />
+      </Principal>
+      <Dependent Role="AssetRelationship">
+        <PropertyRef Name="AssetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetRelationship_Asset1">
+    <End Role="Asset" Type="Self.Asset" Multiplicity="1" />
+    <End Role="AssetRelationship" Type="Self.AssetRelationship" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Asset">
+        <PropertyRef Name="AssetID" />
+      </Principal>
+      <Dependent Role="AssetRelationship">
+        <PropertyRef Name="RelatedAssetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetSubType_AssetType">
+    <End Role="AssetType" Type="Self.AssetType" Multiplicity="1" />
+    <End Role="AssetSubType" Type="Self.AssetSubType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AssetType">
+        <PropertyRef Name="AssetTypeID" />
+      </Principal>
+      <Dependent Role="AssetSubType">
+        <PropertyRef Name="AssetType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetSubTypeProperty_AssetSubType">
+    <End Role="AssetSubType" Type="Self.AssetSubType" Multiplicity="1" />
+    <End Role="AssetSubTypeProperty" Type="Self.AssetSubTypeProperty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AssetSubType">
+        <PropertyRef Name="AssetSubTypeID" />
+      </Principal>
+      <Dependent Role="AssetSubTypeProperty">
+        <PropertyRef Name="AssetSubType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetSubTypePropertyValue_Asset">
+    <End Role="Asset" Type="Self.Asset" Multiplicity="1" />
+    <End Role="AssetSubTypePropertyValue" Type="Self.AssetSubTypePropertyValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Asset">
+        <PropertyRef Name="AssetID" />
+      </Principal>
+      <Dependent Role="AssetSubTypePropertyValue">
+        <PropertyRef Name="Asset" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetSubTypePropertyValue_AssetSubTypeProperty">
+    <End Role="AssetSubTypeProperty" Type="Self.AssetSubTypeProperty" Multiplicity="1" />
+    <End Role="AssetSubTypePropertyValue" Type="Self.AssetSubTypePropertyValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AssetSubTypeProperty">
+        <PropertyRef Name="AssetSubTypePropertyID" />
+      </Principal>
+      <Dependent Role="AssetSubTypePropertyValue">
+        <PropertyRef Name="AssetSubTypeProperty" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetTypeProperty_AssetType">
+    <End Role="AssetType" Type="Self.AssetType" Multiplicity="1" />
+    <End Role="AssetTypeProperty" Type="Self.AssetTypeProperty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AssetType">
+        <PropertyRef Name="AssetTypeID" />
+      </Principal>
+      <Dependent Role="AssetTypeProperty">
+        <PropertyRef Name="AssetType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetTypePropertyValue_Asset">
+    <End Role="Asset" Type="Self.Asset" Multiplicity="1" />
+    <End Role="AssetTypePropertyValue" Type="Self.AssetTypePropertyValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Asset">
+        <PropertyRef Name="AssetID" />
+      </Principal>
+      <Dependent Role="AssetTypePropertyValue">
+        <PropertyRef Name="Asset" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetTypePropertyValue_AssetTypeProperty">
+    <End Role="AssetTypeProperty" Type="Self.AssetTypeProperty" Multiplicity="1" />
+    <End Role="AssetTypePropertyValue" Type="Self.AssetTypePropertyValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AssetTypeProperty">
+        <PropertyRef Name="AssetTypePropertyID" />
+      </Principal>
+      <Dependent Role="AssetTypePropertyValue">
+        <PropertyRef Name="AssetTypeProperty" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderItems_Order">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderItems">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="usp_AssetRelationshipDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetID" Type="int" Mode="In" />
+    <Parameter Name="RelatedAssetID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_AssetRelationshipHierarchy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="usp_AssetRelationshipHierarchyChild" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ParentID" Type="int" Mode="In" />
+    <Parameter Name="assetID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_AssetRelationshipHierarchyParent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_AssetRelationshipInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetID" Type="int" Mode="In" />
+    <Parameter Name="RelatedAssetID" Type="int" Mode="In" />
+    <Parameter Name="Relationship" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="usp_AssetRelationshipSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_AssetRelationshipUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetID" Type="int" Mode="In" />
+    <Parameter Name="RelatedAssetID" Type="int" Mode="In" />
+    <Parameter Name="Relationship" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="usp_AssetSubTypePropertyValueLookupDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LookupID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_AssetSubTypePropertyValueLookupInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PropertySubType" Type="int" Mode="In" />
+    <Parameter Name="LookupValue" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_AssetSubTypePropertyValueLookupSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PropertySubType" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_AssetSubTypePropertyValueLookupUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LookupID" Type="int" Mode="In" />
+    <Parameter Name="PropertySubType" Type="int" Mode="In" />
+    <Parameter Name="LookupValue" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_AssetTypePropertyValueLookupDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LookupID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_AssetTypePropertyValueLookupInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PropertyType" Type="int" Mode="In" />
+    <Parameter Name="LookupValue" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_AssetTypePropertyValueLookupSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PropertyType" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_AssetTypePropertyValueLookupUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="LookupID" Type="int" Mode="In" />
+    <Parameter Name="PropertyType" Type="int" Mode="In" />
+    <Parameter Name="LookupValue" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_CreateAsset" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetType" Type="int" Mode="In" />
+    <Parameter Name="AssetSubType" Type="int" Mode="In" />
+    <Parameter Name="Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="ClientID" Type="nvarchar" Mode="In" />
+    <Parameter Name="LabID" Type="nvarchar" Mode="In" />
+    <Parameter Name="Status" Type="nvarchar" Mode="In" />
+    <Parameter Name="DeviceStatus" Type="nvarchar" Mode="In" />
+    <Parameter Name="HasAlarm" Type="bit" Mode="In" />
+    <Parameter Name="AlarmMessage" Type="nvarchar" Mode="In" />
+    <Parameter Name="LastServiceDate" Type="date" Mode="In" />
+    <Parameter Name="NextServiceDate" Type="date" Mode="In" />
+    <Parameter Name="Notes" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_CreateAssetSubType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetSubTypeID" Type="int" Mode="In" />
+    <Parameter Name="AssetType" Type="int" Mode="In" />
+    <Parameter Name="AssetSubType" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_CreateAssetSubTypeProperty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetSubTypePropertyID" Type="int" Mode="In" />
+    <Parameter Name="AssetSubType" Type="int" Mode="In" />
+    <Parameter Name="AssetSubTypeProperty" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_CreateAssetType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetTypeID" Type="int" Mode="In" />
+    <Parameter Name="AssetType" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_CreateAssetTypeProperty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetTypePropertyID" Type="int" Mode="In" />
+    <Parameter Name="AssetType" Type="int" Mode="In" />
+    <Parameter Name="AssetTypeProperty" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_DeleteAsset" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_DeleteAssetSubType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetSubTypeID" Type="int" Mode="In" />
+    <Parameter Name="AssetType" Type="int" Mode="In" />
+    <Parameter Name="AssetSubType" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_DeleteAssetSubTypeProperty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetSubTypePropertyID" Type="int" Mode="In" />
+    <Parameter Name="AssetSubType" Type="int" Mode="In" />
+    <Parameter Name="AssetSubTypeProperty" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_DeleteAssetType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetTypeID" Type="int" Mode="In" />
+    <Parameter Name="AssetType" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_DeleteAssetTypeProperty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetTypePropertyID" Type="int" Mode="In" />
+    <Parameter Name="AssetType" Type="int" Mode="In" />
+    <Parameter Name="AssetTypeProperty" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_DocumentCheck" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_DocumentMimeTypesSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Extension" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_DocumentOpen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_DocumentsDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_DocumentsInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetID" Type="int" Mode="In" />
+    <Parameter Name="Title" Type="nvarchar" Mode="In" />
+    <Parameter Name="Extension" Type="nvarchar" Mode="In" />
+    <Parameter Name="Data" Type="varbinary(max)" Mode="In" />
+    <Parameter Name="ContentLength" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_DocumentsSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_DocumentsUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="AssetID" Type="int" Mode="In" />
+    <Parameter Name="Title" Type="nvarchar" Mode="In" />
+    <Parameter Name="DateUploaded" Type="datetime" Mode="In" />
+    <Parameter Name="Extension" Type="nvarchar" Mode="In" />
+    <Parameter Name="Data" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="usp_GetAsset" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_GetAssets" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="usp_GetAssetSubType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetType" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_GetAssetSubTypeProperty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetSubType" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_GetAssetSubTypeValues" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Asset" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_GetAssetType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="usp_GetAssetTypeProperty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetType" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_GetAssetTypeValues" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Asset" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_GetLastAssetID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="usp_GetSubTypeLookupValues" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PropertySubType" Type="int" Mode="In" />
+    <Parameter Name="prefixText" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_GetTypeLookupValues" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PropertyType" Type="int" Mode="In" />
+    <Parameter Name="prefixText" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_LookupAssetSubType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetType" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_LookupAssetSubTypebyName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetType" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_LookupAssetType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="usp_LookupDDLTypeValues" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PropertyType" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_OrderDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_OrderHardwareTypeLookup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="usp_OrderInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderType" Type="nvarchar" Mode="In" />
+    <Parameter Name="PurchaseOrderNo" Type="nvarchar" Mode="In" />
+    <Parameter Name="RequisitionNo" Type="nvarchar" Mode="In" />
+    <Parameter Name="Status" Type="nvarchar" Mode="In" />
+    <Parameter Name="Supplier" Type="nvarchar" Mode="In" />
+    <Parameter Name="CallReference" Type="nvarchar" Mode="In" />
+    <Parameter Name="CostCode" Type="nvarchar" Mode="In" />
+    <Parameter Name="InvoiceNo" Type="nvarchar" Mode="In" />
+    <Parameter Name="OrderDate" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="usp_OrderItemsDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_OrderItemsInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="OrderID" Type="int" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+    <Parameter Name="MakeOrPublisher" Type="nvarchar" Mode="In" />
+    <Parameter Name="ModelOrTitle" Type="nvarchar" Mode="In" />
+    <Parameter Name="Version" Type="nvarchar" Mode="In" />
+    <Parameter Name="Quantity" Type="int" Mode="In" />
+    <Parameter Name="Value" Type="money" Mode="In" />
+    <Parameter Name="Status" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_OrderItemsSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_OrderItemsUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="OrderID" Type="int" Mode="In" />
+    <Parameter Name="Type" Type="nvarchar" Mode="In" />
+    <Parameter Name="MakeOrPublisher" Type="nvarchar" Mode="In" />
+    <Parameter Name="ModelOrTitle" Type="nvarchar" Mode="In" />
+    <Parameter Name="Version" Type="nvarchar" Mode="In" />
+    <Parameter Name="Quantity" Type="int" Mode="In" />
+    <Parameter Name="Value" Type="money" Mode="In" />
+    <Parameter Name="Status" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_OrderSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_OrderSelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="usp_OrderUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="OrderType" Type="nvarchar" Mode="In" />
+    <Parameter Name="PurchaseOrderNo" Type="nvarchar" Mode="In" />
+    <Parameter Name="RequisitionNo" Type="nvarchar" Mode="In" />
+    <Parameter Name="Status" Type="nvarchar" Mode="In" />
+    <Parameter Name="Supplier" Type="nvarchar" Mode="In" />
+    <Parameter Name="CallReference" Type="nvarchar" Mode="In" />
+    <Parameter Name="CostCode" Type="nvarchar" Mode="In" />
+    <Parameter Name="InvoiceNo" Type="nvarchar" Mode="In" />
+    <Parameter Name="OrderDate" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="usp_UpdateAsset" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetID" Type="int" Mode="In" />
+    <Parameter Name="AssetType" Type="int" Mode="In" />
+    <Parameter Name="AssetSubType" Type="int" Mode="In" />
+    <Parameter Name="Name" Type="nvarchar" Mode="In" />
+    <Parameter Name="ClientID" Type="nvarchar" Mode="In" />
+    <Parameter Name="LabID" Type="nvarchar" Mode="In" />
+    <Parameter Name="Status" Type="nvarchar" Mode="In" />
+    <Parameter Name="DeviceStatus" Type="nvarchar" Mode="In" />
+    <Parameter Name="HasAlarm" Type="bit" Mode="In" />
+    <Parameter Name="AlarmMessage" Type="nvarchar" Mode="In" />
+    <Parameter Name="LastServiceDate" Type="date" Mode="In" />
+    <Parameter Name="NextServiceDate" Type="date" Mode="In" />
+    <Parameter Name="Notes" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_UpdateAssetSubType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetSubTypeID" Type="int" Mode="In" />
+    <Parameter Name="AssetType" Type="int" Mode="In" />
+    <Parameter Name="AssetSubType" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_UpdateAssetSubTypeProperty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetSubTypePropertyID" Type="int" Mode="In" />
+    <Parameter Name="AssetSubType" Type="int" Mode="In" />
+    <Parameter Name="AssetSubTypeProperty" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_UpdateAssetSubTypeValues" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetSubTypePropertyValueID" Type="int" Mode="In" />
+    <Parameter Name="AssetSubTypePropertyValue" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_UpdateAssetType" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetTypeID" Type="int" Mode="In" />
+    <Parameter Name="AssetType" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_UpdateAssetTypeProperty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetTypePropertyID" Type="int" Mode="In" />
+    <Parameter Name="AssetType" Type="int" Mode="In" />
+    <Parameter Name="AssetTypeProperty" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_UpdateAssetTypeValues" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AssetTypePropertyValueID" Type="int" Mode="In" />
+    <Parameter Name="AssetTypePropertyValue" Type="nvarchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="AssetDBAzureSampleModelStoreContainer">
+    <EntitySet Name="Asset" EntityType="Self.Asset" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AssetRelationship" EntityType="Self.AssetRelationship" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AssetSubType" EntityType="Self.AssetSubType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AssetSubTypeProperty" EntityType="Self.AssetSubTypeProperty" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AssetSubTypePropertyValue" EntityType="Self.AssetSubTypePropertyValue" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AssetSubTypePropertyValueLookup" EntityType="Self.AssetSubTypePropertyValueLookup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AssetType" EntityType="Self.AssetType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AssetTypeProperty" EntityType="Self.AssetTypeProperty" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AssetTypePropertyValue" EntityType="Self.AssetTypePropertyValue" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AssetTypePropertyValueLookup" EntityType="Self.AssetTypePropertyValueLookup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DocumentMimeTypes" EntityType="Self.DocumentMimeTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Documents" EntityType="Self.Documents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderItems" EntityType="Self.OrderItems" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Asset_AssetSubType" Association="Self.FK_Asset_AssetSubType">
+      <End Role="AssetSubType" EntitySet="AssetSubType" />
+      <End Role="Asset" EntitySet="Asset" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Asset_AssetType" Association="Self.FK_Asset_AssetType">
+      <End Role="AssetType" EntitySet="AssetType" />
+      <End Role="Asset" EntitySet="Asset" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetRelationship_Asset" Association="Self.FK_AssetRelationship_Asset">
+      <End Role="Asset" EntitySet="Asset" />
+      <End Role="AssetRelationship" EntitySet="AssetRelationship" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetRelationship_Asset1" Association="Self.FK_AssetRelationship_Asset1">
+      <End Role="Asset" EntitySet="Asset" />
+      <End Role="AssetRelationship" EntitySet="AssetRelationship" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetSubType_AssetType" Association="Self.FK_AssetSubType_AssetType">
+      <End Role="AssetType" EntitySet="AssetType" />
+      <End Role="AssetSubType" EntitySet="AssetSubType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetSubTypeProperty_AssetSubType" Association="Self.FK_AssetSubTypeProperty_AssetSubType">
+      <End Role="AssetSubType" EntitySet="AssetSubType" />
+      <End Role="AssetSubTypeProperty" EntitySet="AssetSubTypeProperty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetSubTypePropertyValue_Asset" Association="Self.FK_AssetSubTypePropertyValue_Asset">
+      <End Role="Asset" EntitySet="Asset" />
+      <End Role="AssetSubTypePropertyValue" EntitySet="AssetSubTypePropertyValue" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetSubTypePropertyValue_AssetSubTypeProperty" Association="Self.FK_AssetSubTypePropertyValue_AssetSubTypeProperty">
+      <End Role="AssetSubTypeProperty" EntitySet="AssetSubTypeProperty" />
+      <End Role="AssetSubTypePropertyValue" EntitySet="AssetSubTypePropertyValue" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetTypeProperty_AssetType" Association="Self.FK_AssetTypeProperty_AssetType">
+      <End Role="AssetType" EntitySet="AssetType" />
+      <End Role="AssetTypeProperty" EntitySet="AssetTypeProperty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetTypePropertyValue_Asset" Association="Self.FK_AssetTypePropertyValue_Asset">
+      <End Role="Asset" EntitySet="Asset" />
+      <End Role="AssetTypePropertyValue" EntitySet="AssetTypePropertyValue" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetTypePropertyValue_AssetTypeProperty" Association="Self.FK_AssetTypePropertyValue_AssetTypeProperty">
+      <End Role="AssetTypeProperty" EntitySet="AssetTypeProperty" />
+      <End Role="AssetTypePropertyValue" EntitySet="AssetTypePropertyValue" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderItems_Order" Association="Self.FK_OrderItems_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="OrderItems" EntitySet="OrderItems" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,808 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AssetDBAzureSampleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Asset">
+    <Key>
+      <PropertyRef Name="AssetID" />
+    </Key>
+    <Property Name="AssetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AssetType" Type="Int32" Nullable="false" />
+    <Property Name="AssetSubType" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ClientID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="LabID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DeviceStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="HasAlarm" Type="Boolean" Nullable="false" />
+    <Property Name="AlarmMessage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastServiceDate" Type="DateTime" Precision="0" />
+    <Property Name="NextServiceDate" Type="DateTime" Precision="0" />
+    <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AssetSubType1" Relationship="Self.FK_Asset_AssetSubType" FromRole="Asset" ToRole="AssetSubType" />
+    <NavigationProperty Name="AssetType1" Relationship="Self.FK_Asset_AssetType" FromRole="Asset" ToRole="AssetType" />
+    <NavigationProperty Name="AssetRelationships" Relationship="Self.FK_AssetRelationship_Asset" FromRole="Asset" ToRole="AssetRelationship" />
+    <NavigationProperty Name="AssetRelationships1" Relationship="Self.FK_AssetRelationship_Asset1" FromRole="Asset" ToRole="AssetRelationship" />
+    <NavigationProperty Name="AssetSubTypePropertyValues" Relationship="Self.FK_AssetSubTypePropertyValue_Asset" FromRole="Asset" ToRole="AssetSubTypePropertyValue" />
+    <NavigationProperty Name="AssetTypePropertyValues" Relationship="Self.FK_AssetTypePropertyValue_Asset" FromRole="Asset" ToRole="AssetTypePropertyValue" />
+  </EntityType>
+  <EntityType Name="AssetRelationship">
+    <Key>
+      <PropertyRef Name="AssetID" />
+      <PropertyRef Name="RelatedAssetID" />
+    </Key>
+    <Property Name="AssetID" Type="Int32" Nullable="false" />
+    <Property Name="RelatedAssetID" Type="Int32" Nullable="false" />
+    <Property Name="Relationship" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Asset" Relationship="Self.FK_AssetRelationship_Asset" FromRole="AssetRelationship" ToRole="Asset" />
+    <NavigationProperty Name="Asset1" Relationship="Self.FK_AssetRelationship_Asset1" FromRole="AssetRelationship" ToRole="Asset" />
+  </EntityType>
+  <EntityType Name="AssetSubType">
+    <Key>
+      <PropertyRef Name="AssetSubTypeID" />
+    </Key>
+    <Property Name="AssetSubTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AssetType" Type="Int32" Nullable="false" />
+    <Property Name="AssetSubType1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Assets" Relationship="Self.FK_Asset_AssetSubType" FromRole="AssetSubType" ToRole="Asset" />
+    <NavigationProperty Name="AssetType1" Relationship="Self.FK_AssetSubType_AssetType" FromRole="AssetSubType" ToRole="AssetType" />
+    <NavigationProperty Name="AssetSubTypeProperties" Relationship="Self.FK_AssetSubTypeProperty_AssetSubType" FromRole="AssetSubType" ToRole="AssetSubTypeProperty" />
+  </EntityType>
+  <EntityType Name="AssetSubTypeProperty">
+    <Key>
+      <PropertyRef Name="AssetSubTypePropertyID" />
+    </Key>
+    <Property Name="AssetSubTypePropertyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AssetSubType" Type="Int32" Nullable="false" />
+    <Property Name="AssetSubTypeProperty1" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AssetSubType1" Relationship="Self.FK_AssetSubTypeProperty_AssetSubType" FromRole="AssetSubTypeProperty" ToRole="AssetSubType" />
+    <NavigationProperty Name="AssetSubTypePropertyValues" Relationship="Self.FK_AssetSubTypePropertyValue_AssetSubTypeProperty" FromRole="AssetSubTypeProperty" ToRole="AssetSubTypePropertyValue" />
+  </EntityType>
+  <EntityType Name="AssetSubTypePropertyValue">
+    <Key>
+      <PropertyRef Name="AssetSubTypePropertyValueID" />
+    </Key>
+    <Property Name="AssetSubTypePropertyValueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Asset" Type="Int32" Nullable="false" />
+    <Property Name="AssetSubTypeProperty" Type="Int32" Nullable="false" />
+    <Property Name="AssetSubTypePropertyValue1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Asset1" Relationship="Self.FK_AssetSubTypePropertyValue_Asset" FromRole="AssetSubTypePropertyValue" ToRole="Asset" />
+    <NavigationProperty Name="AssetSubTypeProperty1" Relationship="Self.FK_AssetSubTypePropertyValue_AssetSubTypeProperty" FromRole="AssetSubTypePropertyValue" ToRole="AssetSubTypeProperty" />
+  </EntityType>
+  <EntityType Name="AssetSubTypePropertyValueLookup">
+    <Key>
+      <PropertyRef Name="LookupID" />
+    </Key>
+    <Property Name="LookupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PropertySubType" Type="Int32" Nullable="false" />
+    <Property Name="LookupValue" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AssetType">
+    <Key>
+      <PropertyRef Name="AssetTypeID" />
+    </Key>
+    <Property Name="AssetTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AssetType1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Assets" Relationship="Self.FK_Asset_AssetType" FromRole="AssetType" ToRole="Asset" />
+    <NavigationProperty Name="AssetSubTypes" Relationship="Self.FK_AssetSubType_AssetType" FromRole="AssetType" ToRole="AssetSubType" />
+    <NavigationProperty Name="AssetTypeProperties" Relationship="Self.FK_AssetTypeProperty_AssetType" FromRole="AssetType" ToRole="AssetTypeProperty" />
+  </EntityType>
+  <EntityType Name="AssetTypeProperty">
+    <Key>
+      <PropertyRef Name="AssetTypePropertyID" />
+    </Key>
+    <Property Name="AssetTypePropertyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AssetType" Type="Int32" Nullable="false" />
+    <Property Name="AssetTypeProperty1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AssetType1" Relationship="Self.FK_AssetTypeProperty_AssetType" FromRole="AssetTypeProperty" ToRole="AssetType" />
+    <NavigationProperty Name="AssetTypePropertyValues" Relationship="Self.FK_AssetTypePropertyValue_AssetTypeProperty" FromRole="AssetTypeProperty" ToRole="AssetTypePropertyValue" />
+  </EntityType>
+  <EntityType Name="AssetTypePropertyValue">
+    <Key>
+      <PropertyRef Name="AssetTypePropertyValueID" />
+    </Key>
+    <Property Name="AssetTypePropertyValueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Asset" Type="Int32" Nullable="false" />
+    <Property Name="AssetTypeProperty" Type="Int32" Nullable="false" />
+    <Property Name="AssetTypePropertyValue1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Asset1" Relationship="Self.FK_AssetTypePropertyValue_Asset" FromRole="AssetTypePropertyValue" ToRole="Asset" />
+    <NavigationProperty Name="AssetTypeProperty1" Relationship="Self.FK_AssetTypePropertyValue_AssetTypeProperty" FromRole="AssetTypePropertyValue" ToRole="AssetTypeProperty" />
+  </EntityType>
+  <EntityType Name="AssetTypePropertyValueLookup">
+    <Key>
+      <PropertyRef Name="LookupID" />
+    </Key>
+    <Property Name="LookupID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PropertyType" Type="Int32" Nullable="false" />
+    <Property Name="LookupValue" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DocumentMimeType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="MimeType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Document">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AssetID" Type="Int32" />
+    <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateUploaded" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Data" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ContentLength" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="PurchaseOrderNo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="RequisitionNo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Supplier" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CallReference" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CostCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="InvoiceNo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="OrderDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="OrderItems" Relationship="Self.FK_OrderItems_Order" FromRole="Order" ToRole="OrderItems" />
+  </EntityType>
+  <EntityType Name="OrderItem">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="MakeOrPublisher" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ModelOrTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Version" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Value" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Status" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_OrderItems_Order" FromRole="OrderItems" ToRole="Order" />
+  </EntityType>
+  <Association Name="FK_Asset_AssetSubType">
+    <End Role="AssetSubType" Type="Self.AssetSubType" Multiplicity="1" />
+    <End Role="Asset" Type="Self.Asset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AssetSubType">
+        <PropertyRef Name="AssetSubTypeID" />
+      </Principal>
+      <Dependent Role="Asset">
+        <PropertyRef Name="AssetSubType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Asset_AssetType">
+    <End Role="AssetType" Type="Self.AssetType" Multiplicity="1" />
+    <End Role="Asset" Type="Self.Asset" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AssetType">
+        <PropertyRef Name="AssetTypeID" />
+      </Principal>
+      <Dependent Role="Asset">
+        <PropertyRef Name="AssetType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetRelationship_Asset">
+    <End Role="Asset" Type="Self.Asset" Multiplicity="1" />
+    <End Role="AssetRelationship" Type="Self.AssetRelationship" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Asset">
+        <PropertyRef Name="AssetID" />
+      </Principal>
+      <Dependent Role="AssetRelationship">
+        <PropertyRef Name="AssetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetRelationship_Asset1">
+    <End Role="Asset" Type="Self.Asset" Multiplicity="1" />
+    <End Role="AssetRelationship" Type="Self.AssetRelationship" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Asset">
+        <PropertyRef Name="AssetID" />
+      </Principal>
+      <Dependent Role="AssetRelationship">
+        <PropertyRef Name="RelatedAssetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetSubTypePropertyValue_Asset">
+    <End Role="Asset" Type="Self.Asset" Multiplicity="1" />
+    <End Role="AssetSubTypePropertyValue" Type="Self.AssetSubTypePropertyValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Asset">
+        <PropertyRef Name="AssetID" />
+      </Principal>
+      <Dependent Role="AssetSubTypePropertyValue">
+        <PropertyRef Name="Asset" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetTypePropertyValue_Asset">
+    <End Role="Asset" Type="Self.Asset" Multiplicity="1" />
+    <End Role="AssetTypePropertyValue" Type="Self.AssetTypePropertyValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Asset">
+        <PropertyRef Name="AssetID" />
+      </Principal>
+      <Dependent Role="AssetTypePropertyValue">
+        <PropertyRef Name="Asset" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetSubType_AssetType">
+    <End Role="AssetType" Type="Self.AssetType" Multiplicity="1" />
+    <End Role="AssetSubType" Type="Self.AssetSubType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AssetType">
+        <PropertyRef Name="AssetTypeID" />
+      </Principal>
+      <Dependent Role="AssetSubType">
+        <PropertyRef Name="AssetType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetSubTypeProperty_AssetSubType">
+    <End Role="AssetSubType" Type="Self.AssetSubType" Multiplicity="1" />
+    <End Role="AssetSubTypeProperty" Type="Self.AssetSubTypeProperty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AssetSubType">
+        <PropertyRef Name="AssetSubTypeID" />
+      </Principal>
+      <Dependent Role="AssetSubTypeProperty">
+        <PropertyRef Name="AssetSubType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetSubTypePropertyValue_AssetSubTypeProperty">
+    <End Role="AssetSubTypeProperty" Type="Self.AssetSubTypeProperty" Multiplicity="1" />
+    <End Role="AssetSubTypePropertyValue" Type="Self.AssetSubTypePropertyValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AssetSubTypeProperty">
+        <PropertyRef Name="AssetSubTypePropertyID" />
+      </Principal>
+      <Dependent Role="AssetSubTypePropertyValue">
+        <PropertyRef Name="AssetSubTypeProperty" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetTypeProperty_AssetType">
+    <End Role="AssetType" Type="Self.AssetType" Multiplicity="1" />
+    <End Role="AssetTypeProperty" Type="Self.AssetTypeProperty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AssetType">
+        <PropertyRef Name="AssetTypeID" />
+      </Principal>
+      <Dependent Role="AssetTypeProperty">
+        <PropertyRef Name="AssetType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AssetTypePropertyValue_AssetTypeProperty">
+    <End Role="AssetTypeProperty" Type="Self.AssetTypeProperty" Multiplicity="1" />
+    <End Role="AssetTypePropertyValue" Type="Self.AssetTypePropertyValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AssetTypeProperty">
+        <PropertyRef Name="AssetTypePropertyID" />
+      </Principal>
+      <Dependent Role="AssetTypePropertyValue">
+        <PropertyRef Name="AssetTypeProperty" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OrderItems_Order">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="OrderItems" Type="Self.OrderItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderItems">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AssetDBAzureSampleEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Assets" EntityType="Self.Asset" />
+    <EntitySet Name="AssetRelationships" EntityType="Self.AssetRelationship" />
+    <EntitySet Name="AssetSubTypes" EntityType="Self.AssetSubType" />
+    <EntitySet Name="AssetSubTypeProperties" EntityType="Self.AssetSubTypeProperty" />
+    <EntitySet Name="AssetSubTypePropertyValues" EntityType="Self.AssetSubTypePropertyValue" />
+    <EntitySet Name="AssetSubTypePropertyValueLookups" EntityType="Self.AssetSubTypePropertyValueLookup" />
+    <EntitySet Name="AssetTypes" EntityType="Self.AssetType" />
+    <EntitySet Name="AssetTypeProperties" EntityType="Self.AssetTypeProperty" />
+    <EntitySet Name="AssetTypePropertyValues" EntityType="Self.AssetTypePropertyValue" />
+    <EntitySet Name="AssetTypePropertyValueLookups" EntityType="Self.AssetTypePropertyValueLookup" />
+    <EntitySet Name="DocumentMimeTypes" EntityType="Self.DocumentMimeType" />
+    <EntitySet Name="Documents" EntityType="Self.Document" />
+    <EntitySet Name="Orders" EntityType="Self.Order" />
+    <EntitySet Name="OrderItems" EntityType="Self.OrderItem" />
+    <AssociationSet Name="FK_Asset_AssetSubType" Association="Self.FK_Asset_AssetSubType">
+      <End Role="AssetSubType" EntitySet="AssetSubTypes" />
+      <End Role="Asset" EntitySet="Assets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Asset_AssetType" Association="Self.FK_Asset_AssetType">
+      <End Role="AssetType" EntitySet="AssetTypes" />
+      <End Role="Asset" EntitySet="Assets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetRelationship_Asset" Association="Self.FK_AssetRelationship_Asset">
+      <End Role="Asset" EntitySet="Assets" />
+      <End Role="AssetRelationship" EntitySet="AssetRelationships" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetRelationship_Asset1" Association="Self.FK_AssetRelationship_Asset1">
+      <End Role="Asset" EntitySet="Assets" />
+      <End Role="AssetRelationship" EntitySet="AssetRelationships" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetSubTypePropertyValue_Asset" Association="Self.FK_AssetSubTypePropertyValue_Asset">
+      <End Role="Asset" EntitySet="Assets" />
+      <End Role="AssetSubTypePropertyValue" EntitySet="AssetSubTypePropertyValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetTypePropertyValue_Asset" Association="Self.FK_AssetTypePropertyValue_Asset">
+      <End Role="Asset" EntitySet="Assets" />
+      <End Role="AssetTypePropertyValue" EntitySet="AssetTypePropertyValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetSubType_AssetType" Association="Self.FK_AssetSubType_AssetType">
+      <End Role="AssetType" EntitySet="AssetTypes" />
+      <End Role="AssetSubType" EntitySet="AssetSubTypes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetSubTypeProperty_AssetSubType" Association="Self.FK_AssetSubTypeProperty_AssetSubType">
+      <End Role="AssetSubType" EntitySet="AssetSubTypes" />
+      <End Role="AssetSubTypeProperty" EntitySet="AssetSubTypeProperties" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetSubTypePropertyValue_AssetSubTypeProperty" Association="Self.FK_AssetSubTypePropertyValue_AssetSubTypeProperty">
+      <End Role="AssetSubTypeProperty" EntitySet="AssetSubTypeProperties" />
+      <End Role="AssetSubTypePropertyValue" EntitySet="AssetSubTypePropertyValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetTypeProperty_AssetType" Association="Self.FK_AssetTypeProperty_AssetType">
+      <End Role="AssetType" EntitySet="AssetTypes" />
+      <End Role="AssetTypeProperty" EntitySet="AssetTypeProperties" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AssetTypePropertyValue_AssetTypeProperty" Association="Self.FK_AssetTypePropertyValue_AssetTypeProperty">
+      <End Role="AssetTypeProperty" EntitySet="AssetTypeProperties" />
+      <End Role="AssetTypePropertyValue" EntitySet="AssetTypePropertyValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OrderItems_Order" Association="Self.FK_OrderItems_Order">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderItems" EntitySet="OrderItems" />
+    </AssociationSet>
+    <FunctionImport Name="usp_AssetRelationshipDelete">
+      <Parameter Name="AssetID" Mode="In" Type="Int32" />
+      <Parameter Name="RelatedAssetID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_AssetRelationshipHierarchy" ReturnType="Collection(AssetDBAzureSampleModel.usp_AssetRelationshipHierarchy_Result)" />
+    <FunctionImport Name="usp_AssetRelationshipHierarchyChild" ReturnType="Collection(AssetDBAzureSampleModel.usp_AssetRelationshipHierarchyChild_Result)">
+      <Parameter Name="ParentID" Mode="In" Type="Int32" />
+      <Parameter Name="assetID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_AssetRelationshipHierarchyParent" ReturnType="Collection(AssetDBAzureSampleModel.usp_AssetRelationshipHierarchyParent_Result)">
+      <Parameter Name="AssetID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_AssetRelationshipInsert">
+      <Parameter Name="AssetID" Mode="In" Type="Int32" />
+      <Parameter Name="RelatedAssetID" Mode="In" Type="Int32" />
+      <Parameter Name="Relationship" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="usp_AssetRelationshipSelect" ReturnType="Collection(AssetDBAzureSampleModel.usp_AssetRelationshipSelect_Result)">
+      <Parameter Name="AssetID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_AssetRelationshipUpdate">
+      <Parameter Name="AssetID" Mode="In" Type="Int32" />
+      <Parameter Name="RelatedAssetID" Mode="In" Type="Int32" />
+      <Parameter Name="Relationship" Mode="In" Type="Boolean" />
+    </FunctionImport>
+    <FunctionImport Name="usp_AssetSubTypePropertyValueLookupDelete">
+      <Parameter Name="LookupID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_AssetSubTypePropertyValueLookupInsert">
+      <Parameter Name="PropertySubType" Mode="In" Type="Int32" />
+      <Parameter Name="LookupValue" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_AssetSubTypePropertyValueLookupSelect" ReturnType="Collection(AssetDBAzureSampleModel.usp_AssetSubTypePropertyValueLookupSelect_Result)">
+      <Parameter Name="PropertySubType" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_AssetSubTypePropertyValueLookupUpdate">
+      <Parameter Name="LookupID" Mode="In" Type="Int32" />
+      <Parameter Name="PropertySubType" Mode="In" Type="Int32" />
+      <Parameter Name="LookupValue" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_AssetTypePropertyValueLookupDelete">
+      <Parameter Name="LookupID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_AssetTypePropertyValueLookupInsert">
+      <Parameter Name="PropertyType" Mode="In" Type="Int32" />
+      <Parameter Name="LookupValue" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_AssetTypePropertyValueLookupSelect" ReturnType="Collection(AssetDBAzureSampleModel.usp_AssetTypePropertyValueLookupSelect_Result)">
+      <Parameter Name="PropertyType" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_AssetTypePropertyValueLookupUpdate">
+      <Parameter Name="LookupID" Mode="In" Type="Int32" />
+      <Parameter Name="PropertyType" Mode="In" Type="Int32" />
+      <Parameter Name="LookupValue" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_CreateAsset">
+      <Parameter Name="AssetType" Mode="In" Type="Int32" />
+      <Parameter Name="AssetSubType" Mode="In" Type="Int32" />
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="ClientID" Mode="In" Type="String" />
+      <Parameter Name="LabID" Mode="In" Type="String" />
+      <Parameter Name="Status" Mode="In" Type="String" />
+      <Parameter Name="DeviceStatus" Mode="In" Type="String" />
+      <Parameter Name="HasAlarm" Mode="In" Type="Boolean" />
+      <Parameter Name="AlarmMessage" Mode="In" Type="String" />
+      <Parameter Name="LastServiceDate" Mode="In" Type="DateTime" />
+      <Parameter Name="NextServiceDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Notes" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_CreateAssetSubType">
+      <Parameter Name="AssetSubTypeID" Mode="In" Type="Int32" />
+      <Parameter Name="AssetType" Mode="In" Type="Int32" />
+      <Parameter Name="AssetSubType" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_CreateAssetSubTypeProperty">
+      <Parameter Name="AssetSubTypePropertyID" Mode="In" Type="Int32" />
+      <Parameter Name="AssetSubType" Mode="In" Type="Int32" />
+      <Parameter Name="AssetSubTypeProperty" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_CreateAssetType">
+      <Parameter Name="AssetTypeID" Mode="In" Type="Int32" />
+      <Parameter Name="AssetType" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_CreateAssetTypeProperty">
+      <Parameter Name="AssetTypePropertyID" Mode="In" Type="Int32" />
+      <Parameter Name="AssetType" Mode="In" Type="Int32" />
+      <Parameter Name="AssetTypeProperty" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_DeleteAsset">
+      <Parameter Name="AssetID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_DeleteAssetSubType">
+      <Parameter Name="AssetSubTypeID" Mode="In" Type="Int32" />
+      <Parameter Name="AssetType" Mode="In" Type="Int32" />
+      <Parameter Name="AssetSubType" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_DeleteAssetSubTypeProperty">
+      <Parameter Name="AssetSubTypePropertyID" Mode="In" Type="Int32" />
+      <Parameter Name="AssetSubType" Mode="In" Type="Int32" />
+      <Parameter Name="AssetSubTypeProperty" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_DeleteAssetType">
+      <Parameter Name="AssetTypeID" Mode="In" Type="Int32" />
+      <Parameter Name="AssetType" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_DeleteAssetTypeProperty">
+      <Parameter Name="AssetTypePropertyID" Mode="In" Type="Int32" />
+      <Parameter Name="AssetType" Mode="In" Type="Int32" />
+      <Parameter Name="AssetTypeProperty" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_DocumentCheck" ReturnType="Collection(AssetDBAzureSampleModel.usp_DocumentCheck_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_DocumentMimeTypesSelect" ReturnType="Collection(String)">
+      <Parameter Name="Extension" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_DocumentOpen" ReturnType="Collection(AssetDBAzureSampleModel.usp_DocumentOpen_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_DocumentsDelete">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_DocumentsInsert">
+      <Parameter Name="AssetID" Mode="In" Type="Int32" />
+      <Parameter Name="Title" Mode="In" Type="String" />
+      <Parameter Name="Extension" Mode="In" Type="String" />
+      <Parameter Name="Data" Mode="In" Type="Binary" />
+      <Parameter Name="ContentLength" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_DocumentsSelect" ReturnType="Collection(AssetDBAzureSampleModel.usp_DocumentsSelect_Result)">
+      <Parameter Name="AssetID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_DocumentsUpdate">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+      <Parameter Name="AssetID" Mode="In" Type="Int32" />
+      <Parameter Name="Title" Mode="In" Type="String" />
+      <Parameter Name="DateUploaded" Mode="In" Type="DateTime" />
+      <Parameter Name="Extension" Mode="In" Type="String" />
+      <Parameter Name="Data" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetAsset" ReturnType="Collection(AssetDBAzureSampleModel.usp_GetAsset_Result)">
+      <Parameter Name="AssetID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetAssets" ReturnType="Collection(AssetDBAzureSampleModel.usp_GetAssets_Result)" />
+    <FunctionImport Name="usp_GetAssetSubType" ReturnType="Collection(AssetDBAzureSampleModel.usp_GetAssetSubType_Result)">
+      <Parameter Name="AssetType" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetAssetSubTypeProperty" ReturnType="Collection(AssetDBAzureSampleModel.usp_GetAssetSubTypeProperty_Result)">
+      <Parameter Name="AssetSubType" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetAssetSubTypeValues" ReturnType="Collection(AssetDBAzureSampleModel.usp_GetAssetSubTypeValues_Result)">
+      <Parameter Name="Asset" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetAssetType" ReturnType="Collection(AssetDBAzureSampleModel.usp_GetAssetType_Result)" />
+    <FunctionImport Name="usp_GetAssetTypeProperty" ReturnType="Collection(AssetDBAzureSampleModel.usp_GetAssetTypeProperty_Result)">
+      <Parameter Name="AssetType" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetAssetTypeValues" ReturnType="Collection(AssetDBAzureSampleModel.usp_GetAssetTypeValues_Result)">
+      <Parameter Name="Asset" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetLastAssetID" ReturnType="Collection(Decimal)" />
+    <FunctionImport Name="usp_GetSubTypeLookupValues" ReturnType="Collection(String)">
+      <Parameter Name="PropertySubType" Mode="In" Type="Int32" />
+      <Parameter Name="prefixText" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_GetTypeLookupValues" ReturnType="Collection(String)">
+      <Parameter Name="PropertyType" Mode="In" Type="Int32" />
+      <Parameter Name="prefixText" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_LookupAssetSubType" ReturnType="Collection(AssetDBAzureSampleModel.usp_LookupAssetSubType_Result)">
+      <Parameter Name="AssetType" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_LookupAssetSubTypebyName" ReturnType="Collection(String)">
+      <Parameter Name="AssetType" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_LookupAssetType" ReturnType="Collection(AssetDBAzureSampleModel.usp_LookupAssetType_Result)" />
+    <FunctionImport Name="usp_LookupDDLTypeValues" ReturnType="Collection(String)">
+      <Parameter Name="PropertyType" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_OrderDelete">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_OrderHardwareTypeLookup" ReturnType="Collection(String)" />
+    <FunctionImport Name="usp_OrderInsert">
+      <Parameter Name="OrderType" Mode="In" Type="String" />
+      <Parameter Name="PurchaseOrderNo" Mode="In" Type="String" />
+      <Parameter Name="RequisitionNo" Mode="In" Type="String" />
+      <Parameter Name="Status" Mode="In" Type="String" />
+      <Parameter Name="Supplier" Mode="In" Type="String" />
+      <Parameter Name="CallReference" Mode="In" Type="String" />
+      <Parameter Name="CostCode" Mode="In" Type="String" />
+      <Parameter Name="InvoiceNo" Mode="In" Type="String" />
+      <Parameter Name="OrderDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="usp_OrderItemsDelete">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_OrderItemsInsert">
+      <Parameter Name="OrderID" Mode="In" Type="Int32" />
+      <Parameter Name="Type" Mode="In" Type="String" />
+      <Parameter Name="MakeOrPublisher" Mode="In" Type="String" />
+      <Parameter Name="ModelOrTitle" Mode="In" Type="String" />
+      <Parameter Name="Version" Mode="In" Type="String" />
+      <Parameter Name="Quantity" Mode="In" Type="Int32" />
+      <Parameter Name="Value" Mode="In" Type="Decimal" />
+      <Parameter Name="Status" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_OrderItemsSelect" ReturnType="Collection(AssetDBAzureSampleModel.usp_OrderItemsSelect_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_OrderItemsUpdate">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+      <Parameter Name="OrderID" Mode="In" Type="Int32" />
+      <Parameter Name="Type" Mode="In" Type="String" />
+      <Parameter Name="MakeOrPublisher" Mode="In" Type="String" />
+      <Parameter Name="ModelOrTitle" Mode="In" Type="String" />
+      <Parameter Name="Version" Mode="In" Type="String" />
+      <Parameter Name="Quantity" Mode="In" Type="Int32" />
+      <Parameter Name="Value" Mode="In" Type="Decimal" />
+      <Parameter Name="Status" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_OrderSelect" ReturnType="Collection(AssetDBAzureSampleModel.usp_OrderSelect_Result)">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_OrderSelectAll" ReturnType="Collection(AssetDBAzureSampleModel.usp_OrderSelectAll_Result)" />
+    <FunctionImport Name="usp_OrderUpdate">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+      <Parameter Name="OrderType" Mode="In" Type="String" />
+      <Parameter Name="PurchaseOrderNo" Mode="In" Type="String" />
+      <Parameter Name="RequisitionNo" Mode="In" Type="String" />
+      <Parameter Name="Status" Mode="In" Type="String" />
+      <Parameter Name="Supplier" Mode="In" Type="String" />
+      <Parameter Name="CallReference" Mode="In" Type="String" />
+      <Parameter Name="CostCode" Mode="In" Type="String" />
+      <Parameter Name="InvoiceNo" Mode="In" Type="String" />
+      <Parameter Name="OrderDate" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UpdateAsset">
+      <Parameter Name="AssetID" Mode="In" Type="Int32" />
+      <Parameter Name="AssetType" Mode="In" Type="Int32" />
+      <Parameter Name="AssetSubType" Mode="In" Type="Int32" />
+      <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="ClientID" Mode="In" Type="String" />
+      <Parameter Name="LabID" Mode="In" Type="String" />
+      <Parameter Name="Status" Mode="In" Type="String" />
+      <Parameter Name="DeviceStatus" Mode="In" Type="String" />
+      <Parameter Name="HasAlarm" Mode="In" Type="Boolean" />
+      <Parameter Name="AlarmMessage" Mode="In" Type="String" />
+      <Parameter Name="LastServiceDate" Mode="In" Type="DateTime" />
+      <Parameter Name="NextServiceDate" Mode="In" Type="DateTime" />
+      <Parameter Name="Notes" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UpdateAssetSubType">
+      <Parameter Name="AssetSubTypeID" Mode="In" Type="Int32" />
+      <Parameter Name="AssetType" Mode="In" Type="Int32" />
+      <Parameter Name="AssetSubType" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UpdateAssetSubTypeProperty">
+      <Parameter Name="AssetSubTypePropertyID" Mode="In" Type="Int32" />
+      <Parameter Name="AssetSubType" Mode="In" Type="Int32" />
+      <Parameter Name="AssetSubTypeProperty" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UpdateAssetSubTypeValues">
+      <Parameter Name="AssetSubTypePropertyValueID" Mode="In" Type="Int32" />
+      <Parameter Name="AssetSubTypePropertyValue" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UpdateAssetType">
+      <Parameter Name="AssetTypeID" Mode="In" Type="Int32" />
+      <Parameter Name="AssetType" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UpdateAssetTypeProperty">
+      <Parameter Name="AssetTypePropertyID" Mode="In" Type="Int32" />
+      <Parameter Name="AssetType" Mode="In" Type="Int32" />
+      <Parameter Name="AssetTypeProperty" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_UpdateAssetTypeValues">
+      <Parameter Name="AssetTypePropertyValueID" Mode="In" Type="Int32" />
+      <Parameter Name="AssetTypePropertyValue" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="usp_AssetRelationshipHierarchy_Result">
+    <Property Type="Int32" Name="AssetID" Nullable="true" />
+    <Property Type="String" Name="AssetName" Nullable="true" MaxLength="4000" />
+    <Property Type="Int32" Name="ParentAssetID" Nullable="true" />
+    <Property Type="Int32" Name="HLevel" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usp_AssetRelationshipHierarchyChild_Result">
+    <Property Type="Int32" Name="AssetID" Nullable="false" />
+    <Property Type="String" Name="AssetName" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="childnodecount" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usp_AssetRelationshipHierarchyParent_Result">
+    <Property Type="Int32" Name="AssetID" Nullable="false" />
+    <Property Type="String" Name="AssetName" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="ChildNodeCount" Nullable="true" />
+    <Property Type="String" Name="AssetType" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="usp_AssetRelationshipSelect_Result">
+    <Property Type="Int32" Name="AssetID" Nullable="false" />
+    <Property Type="Int32" Name="RelatedAssetID" Nullable="false" />
+    <Property Type="String" Name="Relationship" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="usp_AssetSubTypePropertyValueLookupSelect_Result">
+    <Property Type="Int32" Name="LookupID" Nullable="false" />
+    <Property Type="Int32" Name="PropertySubType" Nullable="false" />
+    <Property Type="String" Name="LookupValue" Nullable="false" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="usp_AssetTypePropertyValueLookupSelect_Result">
+    <Property Type="Int32" Name="LookupID" Nullable="false" />
+    <Property Type="Int32" Name="PropertyType" Nullable="false" />
+    <Property Type="String" Name="LookupValue" Nullable="false" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="usp_DocumentCheck_Result">
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="MimeType" Nullable="true" MaxLength="100" />
+  </ComplexType>
+  <ComplexType Name="usp_DocumentOpen_Result">
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="152" />
+    <Property Type="Binary" Name="Data" Nullable="false" />
+    <Property Type="String" Name="MimeType" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="ContentLength" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="usp_DocumentsSelect_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="150" />
+    <Property Type="DateTime" Name="DateUploaded" Nullable="false" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="usp_GetAsset_Result">
+    <Property Type="Int32" Name="AssetID" Nullable="false" />
+    <Property Type="Int32" Name="AssetTypeInt" Nullable="false" />
+    <Property Type="Int32" Name="AssetSubTypeInt" Nullable="false" />
+    <Property Type="String" Name="AssetType" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="AssetSubType" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="ClientID" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="LabID" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Status" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="DeviceStatus" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="HasAlarm" Nullable="false" />
+    <Property Type="String" Name="AlarmMessage" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="LastServiceDate" Nullable="true" />
+    <Property Type="DateTime" Name="NextServiceDate" Nullable="true" />
+    <Property Type="String" Name="Notes" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="usp_GetAssets_Result">
+    <Property Type="Int32" Name="AssetID" Nullable="false" />
+    <Property Type="String" Name="AssetType" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="AssetSubType" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="ClientID" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="LabID" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Status" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="DeviceStatus" Nullable="false" MaxLength="50" />
+    <Property Type="Boolean" Name="HasAlarm" Nullable="false" />
+    <Property Type="String" Name="AlarmMessage" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="LastServiceDate" Nullable="true" />
+    <Property Type="DateTime" Name="NextServiceDate" Nullable="true" />
+    <Property Type="String" Name="Notes" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="usp_GetAssetSubType_Result">
+    <Property Type="Int32" Name="AssetSubTypeID" Nullable="false" />
+    <Property Type="Int32" Name="AssetType" Nullable="false" />
+    <Property Type="String" Name="AssetSubType" Nullable="false" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="usp_GetAssetSubTypeProperty_Result">
+    <Property Type="Int32" Name="AssetSubTypePropertyID" Nullable="false" />
+    <Property Type="Int32" Name="AssetSubType" Nullable="false" />
+    <Property Type="String" Name="AssetSubTypeProperty" Nullable="false" MaxLength="25" />
+  </ComplexType>
+  <ComplexType Name="usp_GetAssetSubTypeValues_Result">
+    <Property Type="Int32" Name="AssetSubTypePropertyValueID" Nullable="false" />
+    <Property Type="String" Name="AssetSubTypeProperty" Nullable="false" MaxLength="25" />
+    <Property Type="Int32" Name="AssetSubTypePropertyID" Nullable="false" />
+    <Property Type="String" Name="AssetSubTypePropertyValue" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="usp_GetAssetType_Result">
+    <Property Type="Int32" Name="AssetTypeID" Nullable="false" />
+    <Property Type="String" Name="AssetType" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="usp_GetAssetTypeProperty_Result">
+    <Property Type="Int32" Name="AssetTypePropertyID" Nullable="false" />
+    <Property Type="Int32" Name="AssetType" Nullable="false" />
+    <Property Type="String" Name="AssetTypeProperty" Nullable="false" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="usp_GetAssetTypeValues_Result">
+    <Property Type="Int32" Name="AssetTypePropertyValueID" Nullable="false" />
+    <Property Type="String" Name="AssetTypeProperty" Nullable="false" MaxLength="255" />
+    <Property Type="Int32" Name="AssetTypePropertyID" Nullable="false" />
+    <Property Type="String" Name="AssetTypePropertyValue" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="usp_LookupAssetSubType_Result">
+    <Property Type="Int32" Name="AssetSubTypeID" Nullable="false" />
+    <Property Type="String" Name="AssetSubType" Nullable="false" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="usp_LookupAssetType_Result">
+    <Property Type="Int32" Name="AssetTypeID" Nullable="false" />
+    <Property Type="String" Name="AssetType" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="usp_OrderItemsSelect_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="Int32" Name="OrderID" Nullable="false" />
+    <Property Type="String" Name="Type" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="MakeOrPublisher" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="ModelOrTitle" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Version" Nullable="true" MaxLength="15" />
+    <Property Type="Int32" Name="Quantity" Nullable="true" />
+    <Property Type="Decimal" Name="Value" Nullable="true" Precision="19" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="usp_OrderSelect_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="OrderType" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="PurchaseOrderNo" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="RequisitionNo" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Supplier" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="CallReference" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="CostCode" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="InvoiceNo" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="OrderDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="usp_OrderSelectAll_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="OrderType" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="PurchaseOrderNo" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="RequisitionNo" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="Supplier" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="CallReference" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="CostCode" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="InvoiceNo" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="OrderDate" Nullable="true" Precision="23" />
+  </ComplexType>
+</Schema>

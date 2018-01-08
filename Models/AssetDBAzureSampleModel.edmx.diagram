@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c6c668da59bf49938ba31f142a56aace" Name="Diagram1">
+        <EntityTypeShape EntityType="AssetDBAzureSampleModel.Asset" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AssetDBAzureSampleModel.AssetRelationship" Width="1.5" PointX="7.5" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AssetDBAzureSampleModel.AssetSubType" Width="1.5" PointX="3" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AssetDBAzureSampleModel.AssetSubTypeProperty" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AssetDBAzureSampleModel.AssetSubTypePropertyValue" Width="1.5" PointX="7.5" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="AssetDBAzureSampleModel.AssetSubTypePropertyValueLookup" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AssetDBAzureSampleModel.AssetType" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AssetDBAzureSampleModel.AssetTypeProperty" Width="1.5" PointX="3" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AssetDBAzureSampleModel.AssetTypePropertyValue" Width="1.5" PointX="7.5" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AssetDBAzureSampleModel.AssetTypePropertyValueLookup" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AssetDBAzureSampleModel.DocumentMimeType" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AssetDBAzureSampleModel.Document" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AssetDBAzureSampleModel.Order" Width="1.5" PointX="7.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="AssetDBAzureSampleModel.OrderItem" Width="1.5" PointX="10" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="AssetDBAzureSampleModel.FK_Asset_AssetSubType" ManuallyRouted="false" />
+        <AssociationConnector Association="AssetDBAzureSampleModel.FK_Asset_AssetType" ManuallyRouted="false" />
+        <AssociationConnector Association="AssetDBAzureSampleModel.FK_AssetRelationship_Asset" ManuallyRouted="false" />
+        <AssociationConnector Association="AssetDBAzureSampleModel.FK_AssetRelationship_Asset1" ManuallyRouted="false" />
+        <AssociationConnector Association="AssetDBAzureSampleModel.FK_AssetSubTypePropertyValue_Asset" ManuallyRouted="false" />
+        <AssociationConnector Association="AssetDBAzureSampleModel.FK_AssetTypePropertyValue_Asset" ManuallyRouted="false" />
+        <AssociationConnector Association="AssetDBAzureSampleModel.FK_AssetSubType_AssetType" ManuallyRouted="false" />
+        <AssociationConnector Association="AssetDBAzureSampleModel.FK_AssetSubTypeProperty_AssetSubType" ManuallyRouted="false" />
+        <AssociationConnector Association="AssetDBAzureSampleModel.FK_AssetSubTypePropertyValue_AssetSubTypeProperty" ManuallyRouted="false" />
+        <AssociationConnector Association="AssetDBAzureSampleModel.FK_AssetTypeProperty_AssetType" ManuallyRouted="false" />
+        <AssociationConnector Association="AssetDBAzureSampleModel.FK_AssetTypePropertyValue_AssetTypeProperty" ManuallyRouted="false" />
+        <AssociationConnector Association="AssetDBAzureSampleModel.FK_OrderItems_Order" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

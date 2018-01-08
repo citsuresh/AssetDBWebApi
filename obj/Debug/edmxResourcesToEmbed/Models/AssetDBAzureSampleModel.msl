@@ -1,0 +1,442 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AssetDBAzureSampleModelStoreContainer" CdmEntityContainer="AssetDBAzureSampleEntities">
+    <EntitySetMapping Name="Assets">
+      <EntityTypeMapping TypeName="AssetDBAzureSampleModel.Asset">
+        <MappingFragment StoreEntitySet="Asset">
+          <ScalarProperty Name="AssetID" ColumnName="AssetID" />
+          <ScalarProperty Name="AssetType" ColumnName="AssetType" />
+          <ScalarProperty Name="AssetSubType" ColumnName="AssetSubType" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="LabID" ColumnName="LabID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DeviceStatus" ColumnName="DeviceStatus" />
+          <ScalarProperty Name="HasAlarm" ColumnName="HasAlarm" />
+          <ScalarProperty Name="AlarmMessage" ColumnName="AlarmMessage" />
+          <ScalarProperty Name="LastServiceDate" ColumnName="LastServiceDate" />
+          <ScalarProperty Name="NextServiceDate" ColumnName="NextServiceDate" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AssetRelationships">
+      <EntityTypeMapping TypeName="AssetDBAzureSampleModel.AssetRelationship">
+        <MappingFragment StoreEntitySet="AssetRelationship">
+          <ScalarProperty Name="AssetID" ColumnName="AssetID" />
+          <ScalarProperty Name="RelatedAssetID" ColumnName="RelatedAssetID" />
+          <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AssetSubTypes">
+      <EntityTypeMapping TypeName="AssetDBAzureSampleModel.AssetSubType">
+        <MappingFragment StoreEntitySet="AssetSubType">
+          <ScalarProperty Name="AssetSubTypeID" ColumnName="AssetSubTypeID" />
+          <ScalarProperty Name="AssetType" ColumnName="AssetType" />
+          <ScalarProperty Name="AssetSubType1" ColumnName="AssetSubType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AssetSubTypeProperties">
+      <EntityTypeMapping TypeName="AssetDBAzureSampleModel.AssetSubTypeProperty">
+        <MappingFragment StoreEntitySet="AssetSubTypeProperty">
+          <ScalarProperty Name="AssetSubTypePropertyID" ColumnName="AssetSubTypePropertyID" />
+          <ScalarProperty Name="AssetSubType" ColumnName="AssetSubType" />
+          <ScalarProperty Name="AssetSubTypeProperty1" ColumnName="AssetSubTypeProperty" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AssetSubTypePropertyValues">
+      <EntityTypeMapping TypeName="AssetDBAzureSampleModel.AssetSubTypePropertyValue">
+        <MappingFragment StoreEntitySet="AssetSubTypePropertyValue">
+          <ScalarProperty Name="AssetSubTypePropertyValueID" ColumnName="AssetSubTypePropertyValueID" />
+          <ScalarProperty Name="Asset" ColumnName="Asset" />
+          <ScalarProperty Name="AssetSubTypeProperty" ColumnName="AssetSubTypeProperty" />
+          <ScalarProperty Name="AssetSubTypePropertyValue1" ColumnName="AssetSubTypePropertyValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AssetSubTypePropertyValueLookups">
+      <EntityTypeMapping TypeName="AssetDBAzureSampleModel.AssetSubTypePropertyValueLookup">
+        <MappingFragment StoreEntitySet="AssetSubTypePropertyValueLookup">
+          <ScalarProperty Name="LookupID" ColumnName="LookupID" />
+          <ScalarProperty Name="PropertySubType" ColumnName="PropertySubType" />
+          <ScalarProperty Name="LookupValue" ColumnName="LookupValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AssetTypes">
+      <EntityTypeMapping TypeName="AssetDBAzureSampleModel.AssetType">
+        <MappingFragment StoreEntitySet="AssetType">
+          <ScalarProperty Name="AssetTypeID" ColumnName="AssetTypeID" />
+          <ScalarProperty Name="AssetType1" ColumnName="AssetType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AssetTypeProperties">
+      <EntityTypeMapping TypeName="AssetDBAzureSampleModel.AssetTypeProperty">
+        <MappingFragment StoreEntitySet="AssetTypeProperty">
+          <ScalarProperty Name="AssetTypePropertyID" ColumnName="AssetTypePropertyID" />
+          <ScalarProperty Name="AssetType" ColumnName="AssetType" />
+          <ScalarProperty Name="AssetTypeProperty1" ColumnName="AssetTypeProperty" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AssetTypePropertyValues">
+      <EntityTypeMapping TypeName="AssetDBAzureSampleModel.AssetTypePropertyValue">
+        <MappingFragment StoreEntitySet="AssetTypePropertyValue">
+          <ScalarProperty Name="AssetTypePropertyValueID" ColumnName="AssetTypePropertyValueID" />
+          <ScalarProperty Name="Asset" ColumnName="Asset" />
+          <ScalarProperty Name="AssetTypeProperty" ColumnName="AssetTypeProperty" />
+          <ScalarProperty Name="AssetTypePropertyValue1" ColumnName="AssetTypePropertyValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AssetTypePropertyValueLookups">
+      <EntityTypeMapping TypeName="AssetDBAzureSampleModel.AssetTypePropertyValueLookup">
+        <MappingFragment StoreEntitySet="AssetTypePropertyValueLookup">
+          <ScalarProperty Name="LookupID" ColumnName="LookupID" />
+          <ScalarProperty Name="PropertyType" ColumnName="PropertyType" />
+          <ScalarProperty Name="LookupValue" ColumnName="LookupValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DocumentMimeTypes">
+      <EntityTypeMapping TypeName="AssetDBAzureSampleModel.DocumentMimeType">
+        <MappingFragment StoreEntitySet="DocumentMimeTypes">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Extension" ColumnName="Extension" />
+          <ScalarProperty Name="MimeType" ColumnName="MimeType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Documents">
+      <EntityTypeMapping TypeName="AssetDBAzureSampleModel.Document">
+        <MappingFragment StoreEntitySet="Documents">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="AssetID" ColumnName="AssetID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="DateUploaded" ColumnName="DateUploaded" />
+          <ScalarProperty Name="Extension" ColumnName="Extension" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="ContentLength" ColumnName="ContentLength" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="AssetDBAzureSampleModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+          <ScalarProperty Name="PurchaseOrderNo" ColumnName="PurchaseOrderNo" />
+          <ScalarProperty Name="RequisitionNo" ColumnName="RequisitionNo" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+          <ScalarProperty Name="CallReference" ColumnName="CallReference" />
+          <ScalarProperty Name="CostCode" ColumnName="CostCode" />
+          <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderItems">
+      <EntityTypeMapping TypeName="AssetDBAzureSampleModel.OrderItem">
+        <MappingFragment StoreEntitySet="OrderItems">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="MakeOrPublisher" ColumnName="MakeOrPublisher" />
+          <ScalarProperty Name="ModelOrTitle" ColumnName="ModelOrTitle" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="usp_AssetRelationshipDelete" FunctionName="AssetDBAzureSampleModel.Store.usp_AssetRelationshipDelete" />
+    <FunctionImportMapping FunctionImportName="usp_AssetRelationshipHierarchy" FunctionName="AssetDBAzureSampleModel.Store.usp_AssetRelationshipHierarchy">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetDBAzureSampleModel.usp_AssetRelationshipHierarchy_Result">
+          <ScalarProperty Name="AssetID" ColumnName="AssetID" />
+          <ScalarProperty Name="AssetName" ColumnName="AssetName" />
+          <ScalarProperty Name="ParentAssetID" ColumnName="ParentAssetID" />
+          <ScalarProperty Name="HLevel" ColumnName="HLevel" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_AssetRelationshipHierarchyChild" FunctionName="AssetDBAzureSampleModel.Store.usp_AssetRelationshipHierarchyChild">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetDBAzureSampleModel.usp_AssetRelationshipHierarchyChild_Result">
+          <ScalarProperty Name="AssetID" ColumnName="AssetID" />
+          <ScalarProperty Name="AssetName" ColumnName="AssetName" />
+          <ScalarProperty Name="childnodecount" ColumnName="childnodecount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_AssetRelationshipHierarchyParent" FunctionName="AssetDBAzureSampleModel.Store.usp_AssetRelationshipHierarchyParent">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetDBAzureSampleModel.usp_AssetRelationshipHierarchyParent_Result">
+          <ScalarProperty Name="AssetID" ColumnName="AssetID" />
+          <ScalarProperty Name="AssetName" ColumnName="AssetName" />
+          <ScalarProperty Name="ChildNodeCount" ColumnName="ChildNodeCount" />
+          <ScalarProperty Name="AssetType" ColumnName="AssetType" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_AssetRelationshipInsert" FunctionName="AssetDBAzureSampleModel.Store.usp_AssetRelationshipInsert" />
+    <FunctionImportMapping FunctionImportName="usp_AssetRelationshipSelect" FunctionName="AssetDBAzureSampleModel.Store.usp_AssetRelationshipSelect">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetDBAzureSampleModel.usp_AssetRelationshipSelect_Result">
+          <ScalarProperty Name="AssetID" ColumnName="AssetID" />
+          <ScalarProperty Name="RelatedAssetID" ColumnName="RelatedAssetID" />
+          <ScalarProperty Name="Relationship" ColumnName="Relationship" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_AssetRelationshipUpdate" FunctionName="AssetDBAzureSampleModel.Store.usp_AssetRelationshipUpdate" />
+    <FunctionImportMapping FunctionImportName="usp_AssetSubTypePropertyValueLookupDelete" FunctionName="AssetDBAzureSampleModel.Store.usp_AssetSubTypePropertyValueLookupDelete" />
+    <FunctionImportMapping FunctionImportName="usp_AssetSubTypePropertyValueLookupInsert" FunctionName="AssetDBAzureSampleModel.Store.usp_AssetSubTypePropertyValueLookupInsert" />
+    <FunctionImportMapping FunctionImportName="usp_AssetSubTypePropertyValueLookupSelect" FunctionName="AssetDBAzureSampleModel.Store.usp_AssetSubTypePropertyValueLookupSelect">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetDBAzureSampleModel.usp_AssetSubTypePropertyValueLookupSelect_Result">
+          <ScalarProperty Name="LookupID" ColumnName="LookupID" />
+          <ScalarProperty Name="PropertySubType" ColumnName="PropertySubType" />
+          <ScalarProperty Name="LookupValue" ColumnName="LookupValue" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_AssetSubTypePropertyValueLookupUpdate" FunctionName="AssetDBAzureSampleModel.Store.usp_AssetSubTypePropertyValueLookupUpdate" />
+    <FunctionImportMapping FunctionImportName="usp_AssetTypePropertyValueLookupDelete" FunctionName="AssetDBAzureSampleModel.Store.usp_AssetTypePropertyValueLookupDelete" />
+    <FunctionImportMapping FunctionImportName="usp_AssetTypePropertyValueLookupInsert" FunctionName="AssetDBAzureSampleModel.Store.usp_AssetTypePropertyValueLookupInsert" />
+    <FunctionImportMapping FunctionImportName="usp_AssetTypePropertyValueLookupSelect" FunctionName="AssetDBAzureSampleModel.Store.usp_AssetTypePropertyValueLookupSelect">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetDBAzureSampleModel.usp_AssetTypePropertyValueLookupSelect_Result">
+          <ScalarProperty Name="LookupID" ColumnName="LookupID" />
+          <ScalarProperty Name="PropertyType" ColumnName="PropertyType" />
+          <ScalarProperty Name="LookupValue" ColumnName="LookupValue" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_AssetTypePropertyValueLookupUpdate" FunctionName="AssetDBAzureSampleModel.Store.usp_AssetTypePropertyValueLookupUpdate" />
+    <FunctionImportMapping FunctionImportName="usp_CreateAsset" FunctionName="AssetDBAzureSampleModel.Store.usp_CreateAsset" />
+    <FunctionImportMapping FunctionImportName="usp_CreateAssetSubType" FunctionName="AssetDBAzureSampleModel.Store.usp_CreateAssetSubType" />
+    <FunctionImportMapping FunctionImportName="usp_CreateAssetSubTypeProperty" FunctionName="AssetDBAzureSampleModel.Store.usp_CreateAssetSubTypeProperty" />
+    <FunctionImportMapping FunctionImportName="usp_CreateAssetType" FunctionName="AssetDBAzureSampleModel.Store.usp_CreateAssetType" />
+    <FunctionImportMapping FunctionImportName="usp_CreateAssetTypeProperty" FunctionName="AssetDBAzureSampleModel.Store.usp_CreateAssetTypeProperty" />
+    <FunctionImportMapping FunctionImportName="usp_DeleteAsset" FunctionName="AssetDBAzureSampleModel.Store.usp_DeleteAsset" />
+    <FunctionImportMapping FunctionImportName="usp_DeleteAssetSubType" FunctionName="AssetDBAzureSampleModel.Store.usp_DeleteAssetSubType" />
+    <FunctionImportMapping FunctionImportName="usp_DeleteAssetSubTypeProperty" FunctionName="AssetDBAzureSampleModel.Store.usp_DeleteAssetSubTypeProperty" />
+    <FunctionImportMapping FunctionImportName="usp_DeleteAssetType" FunctionName="AssetDBAzureSampleModel.Store.usp_DeleteAssetType" />
+    <FunctionImportMapping FunctionImportName="usp_DeleteAssetTypeProperty" FunctionName="AssetDBAzureSampleModel.Store.usp_DeleteAssetTypeProperty" />
+    <FunctionImportMapping FunctionImportName="usp_DocumentCheck" FunctionName="AssetDBAzureSampleModel.Store.usp_DocumentCheck">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetDBAzureSampleModel.usp_DocumentCheck_Result">
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="MimeType" ColumnName="MimeType" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_DocumentMimeTypesSelect" FunctionName="AssetDBAzureSampleModel.Store.usp_DocumentMimeTypesSelect" />
+    <FunctionImportMapping FunctionImportName="usp_DocumentOpen" FunctionName="AssetDBAzureSampleModel.Store.usp_DocumentOpen">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetDBAzureSampleModel.usp_DocumentOpen_Result">
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="MimeType" ColumnName="MimeType" />
+          <ScalarProperty Name="ContentLength" ColumnName="ContentLength" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_DocumentsDelete" FunctionName="AssetDBAzureSampleModel.Store.usp_DocumentsDelete" />
+    <FunctionImportMapping FunctionImportName="usp_DocumentsInsert" FunctionName="AssetDBAzureSampleModel.Store.usp_DocumentsInsert" />
+    <FunctionImportMapping FunctionImportName="usp_DocumentsSelect" FunctionName="AssetDBAzureSampleModel.Store.usp_DocumentsSelect">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetDBAzureSampleModel.usp_DocumentsSelect_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="DateUploaded" ColumnName="DateUploaded" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_DocumentsUpdate" FunctionName="AssetDBAzureSampleModel.Store.usp_DocumentsUpdate" />
+    <FunctionImportMapping FunctionImportName="usp_GetAsset" FunctionName="AssetDBAzureSampleModel.Store.usp_GetAsset">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetDBAzureSampleModel.usp_GetAsset_Result">
+          <ScalarProperty Name="AssetID" ColumnName="AssetID" />
+          <ScalarProperty Name="AssetTypeInt" ColumnName="AssetTypeInt" />
+          <ScalarProperty Name="AssetSubTypeInt" ColumnName="AssetSubTypeInt" />
+          <ScalarProperty Name="AssetType" ColumnName="AssetType" />
+          <ScalarProperty Name="AssetSubType" ColumnName="AssetSubType" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="LabID" ColumnName="LabID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DeviceStatus" ColumnName="DeviceStatus" />
+          <ScalarProperty Name="HasAlarm" ColumnName="HasAlarm" />
+          <ScalarProperty Name="AlarmMessage" ColumnName="AlarmMessage" />
+          <ScalarProperty Name="LastServiceDate" ColumnName="LastServiceDate" />
+          <ScalarProperty Name="NextServiceDate" ColumnName="NextServiceDate" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetAssets" FunctionName="AssetDBAzureSampleModel.Store.usp_GetAssets">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetDBAzureSampleModel.usp_GetAssets_Result">
+          <ScalarProperty Name="AssetID" ColumnName="AssetID" />
+          <ScalarProperty Name="AssetType" ColumnName="AssetType" />
+          <ScalarProperty Name="AssetSubType" ColumnName="AssetSubType" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+          <ScalarProperty Name="LabID" ColumnName="LabID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DeviceStatus" ColumnName="DeviceStatus" />
+          <ScalarProperty Name="HasAlarm" ColumnName="HasAlarm" />
+          <ScalarProperty Name="AlarmMessage" ColumnName="AlarmMessage" />
+          <ScalarProperty Name="LastServiceDate" ColumnName="LastServiceDate" />
+          <ScalarProperty Name="NextServiceDate" ColumnName="NextServiceDate" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetAssetSubType" FunctionName="AssetDBAzureSampleModel.Store.usp_GetAssetSubType">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetDBAzureSampleModel.usp_GetAssetSubType_Result">
+          <ScalarProperty Name="AssetSubTypeID" ColumnName="AssetSubTypeID" />
+          <ScalarProperty Name="AssetType" ColumnName="AssetType" />
+          <ScalarProperty Name="AssetSubType" ColumnName="AssetSubType" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetAssetSubTypeProperty" FunctionName="AssetDBAzureSampleModel.Store.usp_GetAssetSubTypeProperty">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetDBAzureSampleModel.usp_GetAssetSubTypeProperty_Result">
+          <ScalarProperty Name="AssetSubTypePropertyID" ColumnName="AssetSubTypePropertyID" />
+          <ScalarProperty Name="AssetSubType" ColumnName="AssetSubType" />
+          <ScalarProperty Name="AssetSubTypeProperty" ColumnName="AssetSubTypeProperty" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetAssetSubTypeValues" FunctionName="AssetDBAzureSampleModel.Store.usp_GetAssetSubTypeValues">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetDBAzureSampleModel.usp_GetAssetSubTypeValues_Result">
+          <ScalarProperty Name="AssetSubTypePropertyValueID" ColumnName="AssetSubTypePropertyValueID" />
+          <ScalarProperty Name="AssetSubTypeProperty" ColumnName="AssetSubTypeProperty" />
+          <ScalarProperty Name="AssetSubTypePropertyID" ColumnName="AssetSubTypePropertyID" />
+          <ScalarProperty Name="AssetSubTypePropertyValue" ColumnName="AssetSubTypePropertyValue" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetAssetType" FunctionName="AssetDBAzureSampleModel.Store.usp_GetAssetType">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetDBAzureSampleModel.usp_GetAssetType_Result">
+          <ScalarProperty Name="AssetTypeID" ColumnName="AssetTypeID" />
+          <ScalarProperty Name="AssetType" ColumnName="AssetType" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetAssetTypeProperty" FunctionName="AssetDBAzureSampleModel.Store.usp_GetAssetTypeProperty">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetDBAzureSampleModel.usp_GetAssetTypeProperty_Result">
+          <ScalarProperty Name="AssetTypePropertyID" ColumnName="AssetTypePropertyID" />
+          <ScalarProperty Name="AssetType" ColumnName="AssetType" />
+          <ScalarProperty Name="AssetTypeProperty" ColumnName="AssetTypeProperty" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetAssetTypeValues" FunctionName="AssetDBAzureSampleModel.Store.usp_GetAssetTypeValues">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetDBAzureSampleModel.usp_GetAssetTypeValues_Result">
+          <ScalarProperty Name="AssetTypePropertyValueID" ColumnName="AssetTypePropertyValueID" />
+          <ScalarProperty Name="AssetTypeProperty" ColumnName="AssetTypeProperty" />
+          <ScalarProperty Name="AssetTypePropertyID" ColumnName="AssetTypePropertyID" />
+          <ScalarProperty Name="AssetTypePropertyValue" ColumnName="AssetTypePropertyValue" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_GetLastAssetID" FunctionName="AssetDBAzureSampleModel.Store.usp_GetLastAssetID" />
+    <FunctionImportMapping FunctionImportName="usp_GetSubTypeLookupValues" FunctionName="AssetDBAzureSampleModel.Store.usp_GetSubTypeLookupValues" />
+    <FunctionImportMapping FunctionImportName="usp_GetTypeLookupValues" FunctionName="AssetDBAzureSampleModel.Store.usp_GetTypeLookupValues" />
+    <FunctionImportMapping FunctionImportName="usp_LookupAssetSubType" FunctionName="AssetDBAzureSampleModel.Store.usp_LookupAssetSubType">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetDBAzureSampleModel.usp_LookupAssetSubType_Result">
+          <ScalarProperty Name="AssetSubTypeID" ColumnName="AssetSubTypeID" />
+          <ScalarProperty Name="AssetSubType" ColumnName="AssetSubType" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_LookupAssetSubTypebyName" FunctionName="AssetDBAzureSampleModel.Store.usp_LookupAssetSubTypebyName" />
+    <FunctionImportMapping FunctionImportName="usp_LookupAssetType" FunctionName="AssetDBAzureSampleModel.Store.usp_LookupAssetType">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetDBAzureSampleModel.usp_LookupAssetType_Result">
+          <ScalarProperty Name="AssetTypeID" ColumnName="AssetTypeID" />
+          <ScalarProperty Name="AssetType" ColumnName="AssetType" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_LookupDDLTypeValues" FunctionName="AssetDBAzureSampleModel.Store.usp_LookupDDLTypeValues" />
+    <FunctionImportMapping FunctionImportName="usp_OrderDelete" FunctionName="AssetDBAzureSampleModel.Store.usp_OrderDelete" />
+    <FunctionImportMapping FunctionImportName="usp_OrderHardwareTypeLookup" FunctionName="AssetDBAzureSampleModel.Store.usp_OrderHardwareTypeLookup" />
+    <FunctionImportMapping FunctionImportName="usp_OrderInsert" FunctionName="AssetDBAzureSampleModel.Store.usp_OrderInsert" />
+    <FunctionImportMapping FunctionImportName="usp_OrderItemsDelete" FunctionName="AssetDBAzureSampleModel.Store.usp_OrderItemsDelete" />
+    <FunctionImportMapping FunctionImportName="usp_OrderItemsInsert" FunctionName="AssetDBAzureSampleModel.Store.usp_OrderItemsInsert" />
+    <FunctionImportMapping FunctionImportName="usp_OrderItemsSelect" FunctionName="AssetDBAzureSampleModel.Store.usp_OrderItemsSelect">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetDBAzureSampleModel.usp_OrderItemsSelect_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="MakeOrPublisher" ColumnName="MakeOrPublisher" />
+          <ScalarProperty Name="ModelOrTitle" ColumnName="ModelOrTitle" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_OrderItemsUpdate" FunctionName="AssetDBAzureSampleModel.Store.usp_OrderItemsUpdate" />
+    <FunctionImportMapping FunctionImportName="usp_OrderSelect" FunctionName="AssetDBAzureSampleModel.Store.usp_OrderSelect">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetDBAzureSampleModel.usp_OrderSelect_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+          <ScalarProperty Name="PurchaseOrderNo" ColumnName="PurchaseOrderNo" />
+          <ScalarProperty Name="RequisitionNo" ColumnName="RequisitionNo" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+          <ScalarProperty Name="CallReference" ColumnName="CallReference" />
+          <ScalarProperty Name="CostCode" ColumnName="CostCode" />
+          <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_OrderSelectAll" FunctionName="AssetDBAzureSampleModel.Store.usp_OrderSelectAll">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="AssetDBAzureSampleModel.usp_OrderSelectAll_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+          <ScalarProperty Name="PurchaseOrderNo" ColumnName="PurchaseOrderNo" />
+          <ScalarProperty Name="RequisitionNo" ColumnName="RequisitionNo" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+          <ScalarProperty Name="CallReference" ColumnName="CallReference" />
+          <ScalarProperty Name="CostCode" ColumnName="CostCode" />
+          <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_OrderUpdate" FunctionName="AssetDBAzureSampleModel.Store.usp_OrderUpdate" />
+    <FunctionImportMapping FunctionImportName="usp_UpdateAsset" FunctionName="AssetDBAzureSampleModel.Store.usp_UpdateAsset" />
+    <FunctionImportMapping FunctionImportName="usp_UpdateAssetSubType" FunctionName="AssetDBAzureSampleModel.Store.usp_UpdateAssetSubType" />
+    <FunctionImportMapping FunctionImportName="usp_UpdateAssetSubTypeProperty" FunctionName="AssetDBAzureSampleModel.Store.usp_UpdateAssetSubTypeProperty" />
+    <FunctionImportMapping FunctionImportName="usp_UpdateAssetSubTypeValues" FunctionName="AssetDBAzureSampleModel.Store.usp_UpdateAssetSubTypeValues" />
+    <FunctionImportMapping FunctionImportName="usp_UpdateAssetType" FunctionName="AssetDBAzureSampleModel.Store.usp_UpdateAssetType" />
+    <FunctionImportMapping FunctionImportName="usp_UpdateAssetTypeProperty" FunctionName="AssetDBAzureSampleModel.Store.usp_UpdateAssetTypeProperty" />
+    <FunctionImportMapping FunctionImportName="usp_UpdateAssetTypeValues" FunctionName="AssetDBAzureSampleModel.Store.usp_UpdateAssetTypeValues" />
+  </EntityContainerMapping>
+</Mapping>
