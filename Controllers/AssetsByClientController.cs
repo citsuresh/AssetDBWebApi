@@ -10,7 +10,7 @@ namespace AssetDBWebApi.Controllers
 {
     public class AssetsByClientController : ApiController
     {
-        AssetDBAzureSampleEntities db = new AssetDBAzureSampleEntities();
+        AssetDBAzureSampleEntities Db = new AssetDBAzureSampleEntities();
 
         // GET api/<controller>
         public IEnumerable<Asset> Get()
@@ -20,16 +20,16 @@ namespace AssetDBWebApi.Controllers
             if (clientIdKeyValuePair.Any())
             {
                 var clientId = clientIdKeyValuePair.First().Value;
-                return db.Assets.Where(asset => asset.ClientID == clientId);
+                return Db.Assets.Where(asset => asset.ClientID == clientId);
             }
 
-            return db.Assets.ToList();
+            return Db.Assets.ToList();
         }
 
         // GET api/<controller>/clientId
         public IEnumerable<Asset> Get(string clientid)
         {
-            return db.Assets.Where(asset => asset.ClientID == clientid);
+            return Db.Assets.Where(asset => asset.ClientID == clientid);
         }
         
         // GET api/<controller>/5

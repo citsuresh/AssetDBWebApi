@@ -8,14 +8,14 @@ using AssetDBWebApi.Models;
 
 namespace AssetDBWebApi.Controllers
 {
-    public class AssetsController : ApiController
+    public class AssetSubTypesController : ApiController
     {
-        AssetDBAzureSampleEntities db = new AssetDBAzureSampleEntities();
+        AssetDBAzureSampleEntities Db = new AssetDBAzureSampleEntities();
 
         // GET api/<controller>
-        public IEnumerable<Asset> Get()
+        public IEnumerable<AssetSubType> Get()
         {
-            return db.Assets.ToList();
+            return Db.AssetSubTypes.ToList();
         }
 
         // GET api/<controller>/5
