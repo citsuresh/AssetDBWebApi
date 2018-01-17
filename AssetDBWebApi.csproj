@@ -189,6 +189,7 @@
     <Compile Include="Controllers\AssetsController.cs" />
     <Compile Include="Controllers\AssetSubTypesController.cs" />
     <Compile Include="Controllers\AssetTypesController.cs" />
+    <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
